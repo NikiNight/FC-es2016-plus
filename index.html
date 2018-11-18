@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FC-es2015</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="favicon.ico" rel="shortcut icon">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&amp;subset=cyrillic" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+    <div class="wrapper">
+        <h1>News Agregator</h1>
+    </div>
+</header>
+<main>
+    <section class="form">
+        <div class="wrapper">
+            <h2 class="form__title">Choose any category to watch latest hot news</h2>
+            <form action class="choose-form">
+                <div class="choose-form__item">
+                    <label for="country" class="choose-form__label">Please, choose your country</label>
+                    <select name="country" id="country" class="choose-form__select" required>
+                        <option value="us">United States</option>
+                        <option value="ru">Russia</option>
+                        <option value="ua">Ukraine</option>
+                    </select>
+                </div>
+                <div class="choose-form__item">
+                    <label for="category" class="choose-form__label">Please, choose category</label>
+                    <select name="category" id="category" class="choose-form__select" required>
+                        <option value="business">business</option>
+                        <option value="entertainment">entertainment</option>
+                        <option value="health">health</option>
+                        <option value="science">science</option>
+                        <option value="sports">sports</option>
+                        <option value="technology">technology</option>
+                    </select>
+                </div>
+                <div class="choose-form__item">
+                    <label for="pagesize" class="choose-form__label">Choose news count</label>
+                    <select name="pagesize" id="pagesize" class="choose-form__select" required>
+                        <option value="3">3</option>
+                        <option value="6">6</option>
+                        <option value="9">9</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+                <button class="choose-form__item submit">Get news</button>
+            </form>
+        </div>
+    </section>
+    <section class="news">
+        <div class="news__wrapper wrapper">
+            <h2 class="news__title">Latest hot news</h2>
+            <div class="news__container"></div>
+        </div>
+    </section>
+</main>
+<footer>
+    <div class="wrapper">
+        <a href="https://newsapi.org/" target="_blank" class="copyright">Powered by NewsAPI.org</a>
+    </div>
+</footer>
+<script src="js/script.js" type="module"></script>
+</body>
+</html>
