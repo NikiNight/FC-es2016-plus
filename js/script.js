@@ -1,5 +1,3 @@
-import Article from './Article.js';
-
 window.onload = function() {
 
     //Event Listener - submit class button click

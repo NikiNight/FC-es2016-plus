@@ -1,0 +1,28 @@
+{
+  "name": "hometask",
+  "version": "1.0.0",
+  "description": "News API application with es2015 features",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel js --out-file compiled.js",
+    "watch": "babel js --watch --out-file compiled.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ViktoriyaVorozhun/FC-es2016-plus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ViktoriyaVorozhun/FC-es2016-plus/issues"
+  },
+  "homepage": "https://github.com/ViktoriyaVorozhun/FC-es2016-plus#readme",
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6"
+  }
+}
