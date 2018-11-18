@@ -41,18 +41,6 @@ class Article {
         }
 
         article.innerHTML=template;
-
-        if(this.content || this.urlToImage){
-            article.querySelector('.article_show-more').addEventListener('click', () => Article.handleShowmoreClick(article));
-        }
-
         return article;
-
-    }
-
-    //Event listener for show more button
-    static handleShowmoreClick(article) {
-         article.querySelector('.article__body').style.display = 'block';
-         article.querySelector('.article_show-more').style.display = 'none';
     }
 }

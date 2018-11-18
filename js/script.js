@@ -2,37 +2,74 @@ window.onload = function() {
 
     //Event Listener - submit class button click
     document.querySelector('.submit').onclick = function () {
-
-        this.setAttribute('disabled', 'disabled');
-        this.innerHTML = 'Loading';
-
-        fetch(formApi())
-            .then(response => response.json())
-            .then(newsjson => handleJSON(newsjson))
-            .catch(err => alert('Error. Try again later'));
+        disableButton(this);
+        let news = new News(getInputValue('country'), getInputValue('category'), getInputValue('pagesize'));
+        createNews(news);
     };
 
-    //Show last articles in markup container
-    function handleJSON(respon){
+    async function createNews(news) {
+        let newsContainer = getNewsContainer();
+        hideTitle();
+        try {
+            let articles = await news.getData();
+            if(articles){
+                articles.forEach((val) => {newsContainer.appendChild(val.generateArticle())});
+                addShowMoreClickListener();
+            }
+        } catch (err) {
+            console.log(err);
+            showAlertMessage();
+        }
+        showTitle();
+        enableButton('.submit');
+
+    }
+    
+    //Get input value from UI
+    function getInputValue(element) {
+        return document.getElementById(element).value;
+    }
+
+    //Disable submit button, prevent multiclick
+    function disableButton(button) {
+        button.setAttribute('disabled', 'disabled');
+        button.innerHTML = 'Loading';
+    }
+
+    function enableButton(button) {
+        document.querySelector(button).removeAttribute('disabled');
+        document.querySelector(button).innerHTML = 'Get news';
+    }
+
+    //Get and clear news container in DOM
+    function getNewsContainer() {
         const newscontainer = document.querySelector('.news__container');
         newscontainer.innerHTML = '';
+        return newscontainer;
+    }
+
+    //Hide News Title
+    function hideTitle() {
         document.querySelector('.news__title').style.display = "none";
+    }
 
-        respon.articles.forEach(function (val) {
-            let article = new Article(val);
-            newscontainer.appendChild(article.generateArticle());
-        });
-
-        document.querySelector('.submit').removeAttribute('disabled');
-        document.querySelector('.submit').innerHTML = 'Get news';
+    //Show News Title
+    function showTitle() {
         document.querySelector('.news__title').style.display = "block";
     }
 
-    //Form API url from user changed selects
-    function formApi() {
-        let country = document.getElementById('country').value;
-        let category = document.getElementById('category').value;
-        let pagesize = document.getElementById('pagesize').value;
-        return (`https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&sortBy=popularity&pageSize=${pagesize}&apiKey=59e5ec14708e4b768acc8a0664f22906`);
+    //Event listener - show more button click
+    function addShowMoreClickListener() {
+        document.querySelectorAll('.article_show-more').forEach((val) => {
+            val.onclick = function () {
+                this.parentNode.querySelector('.article__body').style.display = 'block';
+                this.parentNode.querySelector('.article_show-more').style.display = 'none';
+            }
+        });
     }
+
+    function showAlertMessage() {
+        document.querySelector('.news__title').innerHTML = 'Something went wrong. Try again later';
+    }
+
 };
