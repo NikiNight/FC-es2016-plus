@@ -1,4 +1,4 @@
-class Article {
+export class Article {
     constructor({author, title, urlToImage, content, description, url}) {
         this.author = author;
         this.title = title;

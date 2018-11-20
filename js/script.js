@@ -1,7 +1,9 @@
+import {News} from "./News.js";
+import 'whatwg-fetch';
 window.onload = function() {
-
     //Event Listener - submit class button click
-    document.querySelector('.submit').onclick = function () {
+    document.querySelector('.submit').onclick = function (e) {
+        e.preventDefault();
         disableButton(this);
         let news = new News(getInputValue('country'), getInputValue('category'), getInputValue('pagesize'));
         createNews(news);
@@ -13,7 +15,9 @@ window.onload = function() {
         try {
             let articles = await news.getData();
             if(articles){
-                articles.forEach((val) => {newsContainer.appendChild(val.generateArticle())});
+                for(let val of articles){
+                    newsContainer.appendChild(val.generateArticle())
+                }
                 addShowMoreClickListener();
             }
         } catch (err) {
@@ -60,12 +64,12 @@ window.onload = function() {
 
     //Event listener - show more button click
     function addShowMoreClickListener() {
-        document.querySelectorAll('.article_show-more').forEach((val) => {
+        for(let val of document.querySelectorAll('.article_show-more')){
             val.onclick = function () {
                 this.parentNode.querySelector('.article__body').style.display = 'block';
                 this.parentNode.querySelector('.article_show-more').style.display = 'none';
             }
-        });
+        }
     }
 
     function showAlertMessage() {

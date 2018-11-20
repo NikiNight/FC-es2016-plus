@@ -1,4 +1,6 @@
-class News {
+import {Article} from "./Article.js";
+
+export class News {
     constructor(country, category, pagesize){
         this.country = country;
         this.category = category;
@@ -14,16 +16,15 @@ class News {
     getData(){
         return fetch(this.formApi)
             .then(response => response.json())
-            .then(newsjson => this.handleJSON(newsjson))
-            .finally(() => console.log('Finished working with response'));
+            .then(newsjson => News.handleJSON(newsjson));
     }
 
     //Form articles list
-    handleJSON(respon){
+    static handleJSON(respon){
         let articles = [];
-        respon.articles.forEach(function (val) {
+        for(let val of respon.articles) {
             articles.push(new Article(val));
-        });
+        }
         return articles;
     }
 }
